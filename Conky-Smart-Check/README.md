@@ -2,7 +2,7 @@ This module checks the SMART status of your drives using ```services.smartd``` a
 
 The text color of the status changes according to the disk status read from the file and remains unchanged when the status is "PASSES". It changes to yellow for "WARNING" and red for "FAILED" status.
 
-You nee to change "your-user-name" to your user name. You also need to add this code to your Conky configuration to read from the file.
+You need to change "your-user-name" to your user name. You also need to add code to your Conky configuration to read from the file for example:
 ```
 SMART Status:${alignr}${if_match "${exec cat /tmp/disk_status.txt}" == "PASSED"} PASSED\
 ${else}${if_match "${exec cat /tmp/disk_status.txt}" == "WARNING"} ${color yellow}WARNING\
