@@ -1,8 +1,8 @@
-XnViewMP appimage packaged for NixOS (tested on 23.11)
+This module facilitates the installation of the XnViewMP package's AppImage into NixOS. It was created and tested on NixOS 23.11 with KDE.
 
-This readme is only quick guide to get started.
+This readme serves as a quick guide to installing XnViewMP on NixOS.
 
-To get XnViewMP installed on you NixOS add it to imports:
+To install XnViewMP on your NixOS system, copy xnviewmp.nix to your modules folder and add it to the imports in configuration.nix:
 
 ```
   # Import configuration modules
@@ -12,18 +12,20 @@ To get XnViewMP installed on you NixOS add it to imports:
       ...
     ];                      
 ```
-
+Now rebuild your system: ```sudo nixos-rebuild switch```
 
 How to update:
-When new update arrives you need run nix-prefetch-url to get sha of file to update the module:
+When a new update arrives, you need to run nix-prefetch-url to get the SHA of the file to update the module:
 
 ```
 nix-prefetch-url https://download.xnview.com/XnView_MP.glibc2.17-x86_64.AppImage
 ```
-Then update section of module with current version and SHA:
+Then update the section of the module with the current version number and SHA:
 
 ```
   # Set Version and SHA
   xnviewVersion = "1.6.5";
   xnviewSHA = "1vkmrwm6sscflxlalk73kwbpg7xf2cr9ay7dznm82w63b7wrfwd7";
 ```
+
+And rebuild your system: ```sudo nixos-rebuild switch```
