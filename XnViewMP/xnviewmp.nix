@@ -23,7 +23,7 @@ let
       Type=Application
       Name=XnView MP
       Icon=xnviewmp
-      Exec=xnviewmp-1.6.5 %F
+      Exec=xnviewmp-${xnviewVersion} %F
       Categories=Graphics;
       EOF
       
