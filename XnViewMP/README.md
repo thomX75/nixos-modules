@@ -1,4 +1,4 @@
-This module facilitates the installation of the XnViewMP package's AppImage into NixOS. It was created and tested on NixOS 23.11 with KDE.
+This module facilitates the installation of the XnViewMP's AppImage package into NixOS. It was created and tested on NixOS 23.11 with KDE.
 
 This readme serves as a quick guide to installing XnViewMP on NixOS.
 
