@@ -3,7 +3,7 @@
 let
 
   # Set Version and SHA
-  xnviewVersion = "1.6.5";
+  xnviewVersion = "1.7.0";
   xnviewSHA = "1x1b1j1cfvv40d822vh3gkcnk2v74r8dmq6sdr0b74imkb7z8wzk";
 
   # Build XnViewMP from AppImage
