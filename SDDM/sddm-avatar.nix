@@ -1,8 +1,10 @@
+# Script and systemd service to on boot copy and update users avatars ~/.face.icon
+# to /var/lib/AccountsService/icons/$username for SDDM to read from.
 { config, pkgs, ... }:
 
 {
 
-  # Define the script in /etc/scripts/sddm-avatar.sh
+  # Define the script /etc/scripts/sddm-avatar.sh
   environment.etc = {
     "scripts/sddm-avatar.sh" = {
       text = ''
@@ -35,7 +37,7 @@
     };
   };
 
-  # Make SDDM depend on sddm-avatar.service and ensure SDDM starts after it.
+  # Ensures SDDM starts after the service.
   systemd.services.sddm = {
     after = [ "sddm-avatar.service" ];
   };
