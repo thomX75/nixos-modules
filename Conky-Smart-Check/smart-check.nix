@@ -2,6 +2,7 @@
 
 {
 
+  # TODO: replace "your-user-name" with your user name.
   users.users.your-user-name.extraGroups = [ "smart" ];
   
   # Enable SmartD service
