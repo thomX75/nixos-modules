@@ -1,3 +1,5 @@
+# Image Shuffler module
+# https://github.com/thomX75/nixos-modules
 # TODO: replace "your-user-name" with you user name.
 
 { config, pkgs, ... }:

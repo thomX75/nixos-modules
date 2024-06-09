@@ -1,3 +1,6 @@
+# XnViewMP appimage module
+# https://github.com/thomX75/nixos-modules
+
 { config, pkgs, ... }:
 
 let

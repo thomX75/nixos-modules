@@ -1,4 +1,6 @@
 # SDDM Breeze theme mod to use with Image Shuffler
+# https://github.com/thomX75/nixos-modules
+
 { pkgs, ... }:
 
 let

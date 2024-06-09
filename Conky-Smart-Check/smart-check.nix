@@ -1,3 +1,5 @@
+# Smart Check module
+# https://github.com/thomX75/nixos-modules
 # TODO: Change "your-user-name" to your username.
 
 { config, pkgs, ... }:

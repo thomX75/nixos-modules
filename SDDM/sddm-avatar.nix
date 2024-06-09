@@ -1,3 +1,6 @@
+# SDDM avatar module
+# https://github.com/thomX75/nixos-modules
+
 { config, pkgs, ... }:
 
 {
