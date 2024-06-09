@@ -1,8 +1,6 @@
-This directory contains flew modules for SDDM ***WIP***
+This directory contains several modules for SDDM ***WIP***.
 
-```sddm-avatar.nix``` - this module will copy on boot all users ```~/.face.icon``` to ```/var/lib/AccountsService/icons/$username``` also update if changed.
-Note ```~/.face.icon``` has to be png picture for SDDM to be able to read it.
+``sddm-avatar.nix``` this module copies all users' ```~/.face.icon``` files to ```/var/lib/AccountsService/icons/$username``` on boot, and updates the copy if the original file changes. Note that ```~/.face.icon``` must be a PNG picture for SDDM to read it.
 
-```sddm-breeze-mod.nix``` - this module along with ```image-shuffler.nix``` will shuffle SDDM background on boot or logoff.
-It sources images from ```~/Pictures/Backgrounds```, creates also link to random selected image in ```~/Pictures``` you can use it in KDE and lock screen.
-Only issue with this solution is that every time background is changes and you open Wallpaper control panel will ask you to apply changes but you don't have to.
+```sddm-breeze-mod.nix``` this module, along with `image-shuffler.nix`, shuffles the SDDM background on boot or logoff. It sources images from `~/Pictures/Backgrounds`, and creates a link to a randomly selected image in `~/Pictures`. You can use this linked image as your wallpaper in KDE and lock screen.
+The only issue with this solution is that every time you change the background, opening the Wallpaper control panel will ask you to apply changes. However, you don't need to do so.

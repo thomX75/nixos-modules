@@ -6,6 +6,7 @@ When a new update arrives, you need to run nix-prefetch-url to get the SHA of th
 ```
 nix-prefetch-url https://download.xnview.com/XnView_MP.glibc2.17-x86_64.AppImage
 ```
+
 Then update the section of the module with the current version number and SHA:
 
 ```
