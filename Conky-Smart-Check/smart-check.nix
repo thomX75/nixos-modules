@@ -1,8 +1,12 @@
+# TODO: Change "your-user-name" to your username.
+
 { config, pkgs, ... }:
 
 {
+  environment.systemPackages = with pkgs; [
+    smartmontools
+  ];
 
-  # TODO: replace "your-user-name" with your user name.
   users.users.your-user-name.extraGroups = [ "smart" ];
   
   # Enable SmartD service
@@ -15,26 +19,24 @@
     };
   };
 
-  # Creates a smart checking script named /etc/scripts/smart-check.sh
-  # which generates output in /tmp/disk_status.txt for Conky to read.
-  environment.etc =
-  {
-    "scripts/smart-check.sh" =
-    {
-      text =
-      ''
-      #!/run/current-system/sw/bin/bash
+  # Creates a smart checking systemd service which generates
+  # output in /tmp/disk_status.txt for Conky to read.
+  systemd.services."smart-check" = {
+    wantedBy = [ "multi-user.target" ];
+    description = "Service to update disk status at startup and every 30 minuter after.";
+    script = ''
+      set -eu
 
       # Function to check SMART status of a disk
       check_disk_smart_status() {
           disk=$1
-          smart_status=$(sudo smartctl -H $disk | grep "SMART overall-health self-assessment test result")
+          smart_status=$(/run/current-system/sw/bin/smartctl -H $disk | grep "SMART overall-health self-assessment test result")
           if [[ $smart_status == *"PASSED"* ]]; then
               disk_status="PASSED"
           elif [[ $smart_status == *"FAILED"* ]]; then
               disk_status="FAILED"
           else
-              smart_warning=$(sudo smartctl -l warning $disk | grep "SMART Health Status")
+              smart_warning=$(/run/current-system/sw/bin/smartctl -l warning $disk | grep "SMART Health Status")
               if [[ $smart_warning == *"Warning"* ]]; then
                   disk_status="WARNING"
               else
@@ -44,7 +46,7 @@
       }
 
       # Get list of disks
-      disks=$(lsblk -o NAME -nldA)
+      disks=$(/run/current-system/sw/bin/lsblk -o NAME -nldA)
 
       # Variable to track overall status
       overall_status="PASSED"
@@ -62,32 +64,22 @@
 
       # Write overall status to file
       echo "$overall_status" > /tmp/disk_status.txt
-
-      '';
-      mode = "0554";
-    };
-  };
-
-  # Creates service to run the script.
-  systemd.services."SmartCheck" = {
-    script = ''
-      #!/run/current-system/sw/bin/bash
-      set -eu
-      /run/current-system/sw/bin/bash /etc/scripts/smart-check.sh
     '';
     serviceConfig = {
       Type = "oneshot";
       User = "root";
+      StandardOutput = "journal+console";
+      StandardError = "journal+console";
     };
   };
 
-  # Enables timer to run smart-check.sh at boot and every 30 minutes after.
-  systemd.timers."SmartCheck" = {
+  # Enables timer to run smart-check service.
+  systemd.timers."smart-check" = {
     wantedBy = [ "timers.target" ];
     timerConfig = {
       OnBootSec = "15s";            # Delay to start after boot, adjust as needed
       OnUnitActiveSec = "30m";      # Run every 30 minutes
-      Unit = "SmartCheck.service";
+      Unit = "smart-check.service";
     };
   };
 

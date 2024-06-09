@@ -1,10 +1,10 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, ... }:
 
 let
 
   # Set Version and SHA
-  xnviewVersion = "1.7.1";
-  xnviewSHA = "175amdwx0an94kh4sb8wx562x6isv5y5025b03n1nni2ip1gha6k"; 
+  xnviewVersion = "1.7.2";
+  xnviewSHA = "1wjzrnqmskxc6fl46hggxcyqszaaszg517n39l6j3l2c92ih1sq5";
 
   # Build XnViewMP from AppImage
   xnviewmp = pkgs.appimageTools.wrapType2 {

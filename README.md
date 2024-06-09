@@ -1,5 +1,5 @@
 # nixos-modules
-This is my collection of modules for the NixOS repository. Most modules are created for the stable 23.11 version unless otherwise stated in the module's readme.
+This is my collection of modules for the NixOS repository. Modules are updated for the stable 24.05.
 
 I'm at the very beginning of my journey with NixOS, so I'll inevitably make mistakes or approach problems incorrectly. If you notice an error or have a different approach, please leave a comment.
 
