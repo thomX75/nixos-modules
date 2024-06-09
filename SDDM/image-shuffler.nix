@@ -32,8 +32,6 @@
 
       # Change permissions for directories and files
       chmod 0644 $SDDMImages/backgrounds/*
-      #find $SDDMImages/backgrounds -type d -exec chmod 0755 {} \;
-      #find $SDDMImages/backgrounds -type f -exec chmod 0644 {} \;
 
       # Create symlink to random picture in destination folder
       link_random () {
