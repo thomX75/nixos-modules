@@ -35,16 +35,8 @@
 
       # Create symlink to random picture in destination folder
       link_random () {
-        # Get the current hour
-        hour=$(date +%H)
-        # If it's late (after 22:00 or before 7:00)
-        if (( 10#$hour >= 22 || 10#$hour < 7 )); then
-          # Pick a file that does not end with -Day
-          file=$(ls $1 | grep -v -e '-Day$' | sort -R | tail -1)
-        else
-          # Pick any file
-          file=$(ls $1 | sort -R | tail -1)
-        fi
+        # Pick any file
+        file=$(ls $1 | sort -R | tail -1)
         echo $file
       }
 
