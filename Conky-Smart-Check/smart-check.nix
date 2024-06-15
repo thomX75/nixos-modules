@@ -5,9 +5,8 @@
 { config, pkgs, ... }:
 
 {
-  environment.systemPackages = with pkgs; [
-    smartmontools
-  ];
+
+  environment.systemPackages = with pkgs; [ util-linux smartmontools ];
 
   users.users.your-user-name.extraGroups = [ "smart" ];
   
@@ -27,41 +26,37 @@
     wantedBy = [ "multi-user.target" ];
     description = "Service to update disk status at startup and every 30 minuter after.";
     script = ''
-      set -eu
+      # Get list of disks
+      disks=$(${pkgs.util-linux}/bin/lsblk -o NAME -nldA)
 
       # Function to check SMART status of a disk
       check_disk_smart_status() {
-          disk=$1
-          smart_status=$(/run/current-system/sw/bin/smartctl -H $disk | grep "SMART overall-health self-assessment test result")
-          if [[ $smart_status == *"PASSED"* ]]; then
-              disk_status="PASSED"
-          elif [[ $smart_status == *"FAILED"* ]]; then
-              disk_status="FAILED"
-          else
-              smart_warning=$(/run/current-system/sw/bin/smartctl -l warning $disk | grep "SMART Health Status")
-              if [[ $smart_warning == *"Warning"* ]]; then
-                  disk_status="WARNING"
-              else
-                  disk_status="UNKNOWN"
-              fi
-          fi
+        disk=$1
+        smart_status=$(${pkgs.smartmontools}/bin/smartctl -H /dev/$disk | grep "SMART overall-health self-assessment test result")
+        if [[ $smart_status == *"PASSED"* ]]; then
+          disk_status="PASSED"
+        elif [[ $smart_status == *"WARNING"* ]]; then
+          disk_status="WARNING"
+        elif [[ $smart_status == *"FAILED"* ]]; then
+          disk_status="FAILED"
+        else
+          disk_status="UNKNOWN"
+        fi
+        echo $disk_status
       }
-
-      # Get list of disks
-      disks=$(/run/current-system/sw/bin/lsblk -o NAME -nldA)
 
       # Variable to track overall status
       overall_status="PASSED"
 
       # Loop through each disk
       for disk in $disks; do
-          check_disk_smart_status "/dev/$disk"
-          if [[ "$disk_status" == "FAILED" ]]; then
-              overall_status="FAILED"
-              break
-          elif [[ "$disk_status" == "WARNING" ]]; then
-              overall_status="WARNING"
-          fi
+        disk_status=$(check_disk_smart_status "$disk")
+        if [[ "$disk_status" == "FAILED" ]]; then
+          overall_status="FAILED"
+          break
+        elif [[ "$disk_status" == "WARNING" ]]; then
+          overall_status="WARNING"
+        fi
       done
 
       # Write overall status to file

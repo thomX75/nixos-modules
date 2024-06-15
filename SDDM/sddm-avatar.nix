@@ -11,7 +11,6 @@
     wantedBy = [ "multi-user.target" ];
     before = [ "sddm.service" ];
     script = ''
-      set -eu
       for user in /home/*; do
           username=$(basename "$user")
           if [ -f "$user/.face.icon" ]; then

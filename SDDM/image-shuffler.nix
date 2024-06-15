@@ -6,13 +6,13 @@
 
 {
  
+  environment.systemPackages = with pkgs; [ rsync ];
   # Define systemd service to run script on boot
   systemd.services."image-shuffler" = {
     description = "Service to shuffle SDDM's & KDE's background images on startup";
     wantedBy = [ "multi-user.target" ];
     before = [ "sddm.service" ];
     script = ''
-      set -eu
 
       # Defines files and paths
       User="your-user-name"
@@ -23,12 +23,10 @@
       SDDMImg="sddm-background.jpg"
 
       # Create destination folder
-      if [ ! -d "$SDDMImages/backgrounds" ]; then
-        mkdir -p $SDDMImages/backgrounds
-      fi
+      mkdir -p $SDDMImages/backgrounds
 
       # Sync user's source folder with script's source folder
-      /run/current-system/sw/bin/rsync --recursive --delete $UserImages/Backgrounds/ $SDDMImages/backgrounds/
+      ${pkgs.rsync}/bin/rsync --recursive --delete $UserImages/Backgrounds/ $SDDMImages/backgrounds/
 
       # Change permissions for directories and files
       chmod 0644 $SDDMImages/backgrounds/*
