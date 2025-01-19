@@ -1,4 +1,4 @@
-# SDDM avatar module
+# XnViewMP appimage module
 # https://github.com/thomX75/nixos-modules
 
 { config, pkgs, ... }:
@@ -12,16 +12,18 @@
     before = [ "sddm.service" ];
     script = ''
       for user in /home/*; do
-          username=$(basename "$user")
-          if [ -f "$user/.face.icon" ]; then
-              if [ ! -f "/var/lib/AccountsService/icons/$username" ]; then
-                  cp "$user/.face.icon" "/var/lib/AccountsService/icons/$username"
-              else
-                  if [ "$user/.face.icon" -nt "/var/lib/AccountsService/icons/$username" ]; then
-                      cp "$user/.face.icon" "/var/lib/AccountsService/icons/$username"
-                  fi
-              fi
+
+        username=$(basename "$user")
+        icon_source="$user/.face.icon"
+        icon_dest="/var/lib/AccountsService/icons/$username"
+
+        if [ -f "$icon_source" ]; then
+          if [ ! -f "$icon_dest" ] || ! cmp -s "$icon_source" "$icon_dest"; then
+            rm -f "$icon_dest"
+            cp -L "$icon_source" "$icon_dest"
           fi
+        fi
+
       done
     '';
     serviceConfig = {

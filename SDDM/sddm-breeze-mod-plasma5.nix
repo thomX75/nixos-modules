@@ -1,5 +1,6 @@
-# SDDM Breeze theme mod to use with Image Shuffler
+# XnViewMP appimage module
 # https://github.com/thomX75/nixos-modules
+# SDDM Breeze theme mod to use with Image Shuffler
 
 { pkgs, ... }:
 

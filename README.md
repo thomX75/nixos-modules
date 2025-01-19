@@ -17,7 +17,7 @@ To install modules on your NixOS system, copy the module(s) to your modules fold
       ...
       ./modules/image-shuffler.nix
       ./modules/sddm-avatar.nix
-      ./modules/sddm-breeze-mod.nix
+      ./modules/sddm-breeze-mod-plasma6.nix
       ./modules/xnviewmp.nix
       ...
     ];                      

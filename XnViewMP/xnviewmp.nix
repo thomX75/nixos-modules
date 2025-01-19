@@ -6,8 +6,8 @@
 let
 
   # Set Version and SHA
-  xnviewVersion = "1.7.2";
-  xnviewSHA = "1wjzrnqmskxc6fl46hggxcyqszaaszg517n39l6j3l2c92ih1sq5";
+  xnviewVersion = "1.8.3";
+  xnviewSHA = "0qixjajawm6gi1l0011k1sskw4z63kiysdqyyx7lr0pf9hz9ns3l";
 
   # Build XnViewMP from AppImage
   xnviewmp = pkgs.appimageTools.wrapType2 {
@@ -28,11 +28,8 @@ let
       Icon=xnviewmp
       Exec=xnviewmp-${xnviewVersion} %F
       Categories=Graphics;
+      Comment = "Image management";
       EOF
-      
-      # Ensure the icon is copied to the right place
-      mkdir -p $out/share/icons/hicolor/512x512/apps
-      cp ${icon}/share/icons/hicolor/512x512/apps/xnviewmp.png $out/share/icons/hicolor/512x512/apps/
     '';
   };
 
