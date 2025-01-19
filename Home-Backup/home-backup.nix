@@ -1,9 +1,10 @@
 # Home directory backuper at scheduled time.
 # https://github.com/thomX75/nixos-modules
 
-# TODO: this module needs some configuration replace "your-user-name" with you actual user name, adjust backupDisk, backupFolder, sourceFile and maxBackups for your needs
-# TODO: sourceFile is a list of folders or files to be back up see example: home-backup.conf
-# TODO: on the bottom configure systemd.timer to run on desired dated and times
+# TODO: This module needs some configuration. Replace "your-user-name" with your actual username, and adjust backupDisk, backupFolder, sourceFile, and maxBackups according to your needs.
+# TODO: sourceFile is a list of folders or files to be backed up. See example: home-backup.conf.
+# TODO: At the bottom, configure systemd.timer to run on the desired dates and times.
+
 
 { config, pkgs, ... }:
 
