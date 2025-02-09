@@ -1,8 +1,8 @@
 Modules in this folder are built directly from Git to update them faster than in distro packages.
 
 How to update: When a new update arrives, you need to run
-How to update: ```nix-prefetch-url``` or ```nix-prefetch-git``` to get the SHA or hash of the file to update the module/source.
-Note: ```nix-prefetch-git``` needs to be installed on your system or you can use ```nix-shell -p nix-prefetch-git``` to temporarily pull the package.
+How to update: ```nix-prefetch-url``` or ```nix-prefetch-git``` to get the SHA or hash of the file to update the appimage, binary or source code.
+Note: ```nix-prefetch-git``` needs to be installed on your system alternatively you can use ```nix-shell -p nix-prefetch-git``` to temporarily pull the package.
 
 For AppImage:
 ```
@@ -22,7 +22,9 @@ Then update the section of the module with the current version number and hash/S
   *version = "x.y.z";
   ...
   hash = "sha256-d4ys305+zlKb912B30UEoAm8eoou8IZNhfqi13WvuKQ=";
+  ```
   or
+  ```
   *SHA = "0phcr3njmi3d8frhgcr99wjxbcrgf80zad8rkgpyfmk6bz0gq2vd";
   ...
 ```
