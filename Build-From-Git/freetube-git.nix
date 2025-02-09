@@ -10,7 +10,7 @@ let
   freetubeSHA = "0phcr3njmi3d8frhgcr99wjxbcrgf80zad8rkgpyfmk6bz0gq2vd";
 
   # Build freetube from AppImage
-  freetube = pkgs.appimageTools.wrapType2 {
+  freetube-git = pkgs.appimageTools.wrapType2 {
     name = "freetube-${freetubeVersion}";
     src = pkgs.fetchurl {
       url = "https://github.com/FreeTubeApp/FreeTube/releases/download/v${freetubeVersion}-beta/freetube-${freetubeVersion}-amd64.AppImage";
@@ -44,7 +44,7 @@ let
 in
 {
   environment.systemPackages = with pkgs; [
-    freetube
+    freetube-git
   ];
 }
 
