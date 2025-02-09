@@ -1,4 +1,4 @@
-# FreeTube directly from GitHub, built from AppImage.
+# Amiberry 7 directly from GitHub, built from source.
 # https://github.com/thomX75/nixos-modules
 
 { config, pkgs, lib, ... }:
