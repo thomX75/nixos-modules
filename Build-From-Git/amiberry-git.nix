@@ -1,6 +1,9 @@
 # Amiberry 7 directly from GitHub, built from source.
 # https://github.com/thomX75/nixos-modules
 
+# This is modified version of already packaged Amiberry by michaelshmitty.
+# https://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/am/amiberry/package.nix
+
 { config, pkgs, lib, ... }:
 
 let
