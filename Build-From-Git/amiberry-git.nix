@@ -10,13 +10,13 @@ let
 
   amiberry-git = pkgs.stdenv.mkDerivation rec {
     pname = "amiberry";
-    version = "7.0.4";
+    version = "7.1.1";
 
     src = pkgs.fetchFromGitHub {
       owner = "BlitterStudio";
       repo = "amiberry";
       rev = "v${version}";
-      hash = "sha256-d4ys305+zlKb912B30UEoAm8eoou8IZNhfqi13WvuKQ=";
+      hash = "sha256-eyCBxq/qq/XbIqddViHqjgXFJkt5Vg/OtkDuaBzvemg=";
     };
 
     nativeBuildInputs = with pkgs; [
@@ -28,14 +28,18 @@ let
     buildInputs = with pkgs; [
       enet
       flac
+      libsysprof-capture
+      libpcap
       libmpeg2
       libmpg123
       libpng
       libserialport
+      pkg-config
       portmidi
       SDL2
       SDL2_image
       SDL2_ttf
+      zstd
     ];
 
     enableParallelBuilding = true;
@@ -46,8 +50,7 @@ let
       cp amiberry $out/bin/
       cp -r data $out/
       install -Dm444 data/amiberry.png $out/share/icons/hicolor/256x256/apps/amiberry.png
-      wrapProgram $out/bin/amiberry \
-        --set-default AMIBERRY_DATA_DIR $out/data/
+      wrapProgram $out/bin/amiberry --set-default AMIBERRY_DATA_DIR $out/data/
       runHook postInstall
     '';
 
@@ -59,7 +62,7 @@ let
         comment = "Amiga emulator";
         icon = "amiberry";
         categories = [
-          "System"
+          "Game"
           "Emulator"
         ];
       })
